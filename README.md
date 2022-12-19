@@ -7,7 +7,7 @@ Python scripts for running private Monte Carlo event production for the CMS expe
   [TWiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TPhase2Instructions#CMSSW_12_3_0_pre4)
  with GeneratorFragments add-ons:
 
-```Python​
+```Shell
 cmsrel CMSSW_12_3_0_pre4
 cd CMSSW_12_3_0_pre4/src
 cmsenv
@@ -25,16 +25,25 @@ scram b -j 4
 
 * fetch this repository:
 
-```Python 
+```Shell
 git clone git@github.com:akalinow/PrivateMCProduction.git
 cd HSCP_Production
 ```
 
 ## Run instructions
 
-The jobs are submitted with a single command:
+* the private generator fragment templates are stored in the [GenFragments](GenFragments) directory
+* the details of the generator configuration are set in functions located in [python/utilityFunctions.py
+](python/utilityFunctions.py) file
+
+The jobs are submitted with command depending on the process to generate:
 
 ```
-./submitJobs.py
+./submitJobs_SingleMu.py
 ```
 
+or 
+
+```Shell
+./submitJobs_HSCP.py
+```

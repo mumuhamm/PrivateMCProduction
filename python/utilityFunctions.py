@@ -17,6 +17,10 @@ eras_conditions = {
 #########################################
 #########################################
 def runCMSDriver(era, withPileUp, generator_fragment):
+
+    CMSSW_BASE = os.environ.get("CMSSW_BASE")
+    command = "ln -s ${PWD}/GenFragments "+ CMSSW_BASE+"Configuration/GenProduction/python/"
+    os.command(command)
     
     premix_switches = "--step GEN,SIM,DIGI,L1,DIGI2RAW "
     if withPileUp:
