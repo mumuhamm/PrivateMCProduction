@@ -2,24 +2,19 @@
 import os, re, commands
 import json
 
-pathRoot = "root://xrootd.unl.edu/"
-cernboxPath = "root://eosuser.cern.ch//eos/user/a/akalinow/"
-
+cernboxPath = "gsiftp://eosuserftp.cern.ch//eos/user/a/akalinow/" 
 cis_endpoint = "gsiftp://se.cis.gov.pl:2811"
 
 directories = [
-    "//dpm/cis.gov.pl/home/cms/store/user/akalinow/OMTF/9_3_14_displaced_100to500_20",
-    "//dpm/cis.gov.pl/home/cms/store/user/akalinow/OMTF/9_3_14_displaced_100to500_500",
-    "//dpm/cis.gov.pl/home/cms/store/user/akalinow/OMTF/9_3_14_displaced_10to50_20",
-    "//dpm/cis.gov.pl/home/cms/store/user/akalinow/OMTF/9_3_14_noSecondaries_v1",
+    "//dpm/cis.gov.pl/home/cms/store/user/jwiechni/HSCP/Run2029_Marianna_14_12_2022/"    
 ]
 
-destinationPath = "/Data/9_3_14_Displaced_v4/"
-sourcePath = 
+destinationPath = "/Data/HSCP/"
 
 for aDir in directories:
-    
-    command = " gfal-ls "+aDir
+    theSource = cis_endpoint+aDir
+    theDestination = cernboxPath + destinationPath
+    command = "gfal-copy -r "+theSource+ " " + theDestination
     print(command)
     os.system(command)
 
