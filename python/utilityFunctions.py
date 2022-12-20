@@ -99,7 +99,7 @@ def dumpProcess(process, fileName):
     out.close()
 #########################################
 #########################################
-def prepareCrabCfg(era,
+def prepareCrabCfg(workAreaName,
                    eventsPerJob,
                    numberOfJobs,
                    outLFNDirBase,
@@ -120,7 +120,7 @@ def prepareCrabCfg(era,
     config.JobType.maxMemoryMB = 2500
     
     config.General.requestName = requestName
-    config.General.workArea = "Tasks_"+era
+    config.General.workArea = workAreaName
     
     config.Data.inputDataset = None
     config.Data.outLFNDirBase = outLFNDirBase+outputDatasetTag
