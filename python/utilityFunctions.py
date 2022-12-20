@@ -20,7 +20,7 @@ def runCMSDriver(era, withPileUp, generator_fragment):
 
     CMSSW_BASE = os.environ.get("CMSSW_BASE")
     command = "ln -s ${PWD}/GenFragments "+ CMSSW_BASE+"Configuration/GenProduction/python/"
-    os.command(command)
+    os.system(command)
     
     premix_switches = "--step GEN,SIM,DIGI,L1,DIGI2RAW "
     if withPileUp:
@@ -57,30 +57,28 @@ def runCMSDriver(era, withPileUp, generator_fragment):
     return process
 #########################################
 #########################################
-def adaptGunParameters(process, iPt,sign, turnOffG4Secondary):
+def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary):
 
     chargeNames = ["m", "p"]
-    ##Set run number (will be the same for all jobs!)
-    process.source.firstRun = cms.untracked.uint32(iPt)
-    ##Set output file name (will be extended by Crab with a random string)
-    fileName = str(iPt)+"_"+chargeNames[sign+1]
-    process.FEVTSIMoutput.fileName =  cms.untracked.string('SingleMu'+"_"+fileName+'.root')
-    ##Set kinematic ranges
-    ptRanges = [0.,1.5, 2., 2.5, 3., 3.5, 4., 4.5, 5., 6., 7., 8., 
-                10., 12., 14., 16., 18., 20., 25., 30., 35., 40., 45., 
-                50., 60., 70., 80., 90., 100., 120.0, 140.0, 1000.0]
 
-    process.source.firstRun = cms.untracked.uint32(iPt)
-
-    process.generator.PGunParameters.MinPt = cms.double(ptRanges[iPt-1])
-    process.generator.PGunParameters.MaxPt = cms.double(ptRanges[iPt])
-    process.generator.PGunParameters.MinOneOverPt = cms.double(1.0/100.0)
-    process.generator.PGunParameters.MaxOneOverPt = cms.double(1.0/1.0)
+    if iPt>-1:
+        ptRanges = [1, 10, 100, 1000]
+        process.source.firstRun = cms.untracked.uint32(iPt)
+        process.generator.PGunParameters.MinPt = cms.double(ptRanges[iPt-1])
+        process.generator.PGunParameters.MaxPt = cms.double(ptRanges[iPt])
+        fileName = str(iPt)+"_"+chargeNames[sign+1]
+        process.FEVTSIMoutput.fileName =  cms.untracked.string('SingleMu'+"_"+fileName+'.root')
+    else:
+        process.source.firstRun = cms.untracked.uint32(1)
+        process.generator.PGunParameters.MinOneOverPt = cms.double(1.0/100.0)
+        process.generator.PGunParameters.MaxOneOverPt = cms.double(1.0/1.0)
+        fileName = "OneOverPt_1_100_"+chargeNames[sign+1]
+        process.FEVTSIMoutput.fileName =  cms.untracked.string('SingleMu'+"_"+fileName+'.root')
     process.generator.PGunParameters.PartID = cms.vint32(-sign*13)
     process.generator.PGunParameters.MinPhi = cms.double(-math.pi)
     process.generator.PGunParameters.MaxPhi = cms.double(math.pi)
-    process.generator.PGunParameters.MinEta = cms.double(-3.0)
-    process.generator.PGunParameters.MaxEta = cms.double(3.0)
+    process.generator.PGunParameters.MinEta = cms.double(etaRange[0])
+    process.generator.PGunParameters.MaxEta = cms.double(etaRange[1])
     process.generator.PGunParameters.AddAntiParticle = cms.bool(False)
 
     if turnOffG4Secondary:

@@ -2,7 +2,7 @@
 
 import os
 
-from utilityFunctions import *
+from python.utilityFunctions import *
 #########################################
 #########################################
 CMSSW_BASE = os.environ.get("CMSSW_BASE")

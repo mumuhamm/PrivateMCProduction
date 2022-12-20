@@ -2,11 +2,11 @@
 
 import os
 
-from utilityFunctions import *
+from python.utilityFunctions import *
 #########################################
 #########################################
 genFragmentsDirectory = "Configuration/GenProduction/python/GenFragments/"
-generator_fragment=genFragmentsDirectory+"/"+"DoubleMuPt1to100Eta24_cfi.py"
+generator_fragment=genFragmentsDirectory+"DoubleMuPt1to100Eta24_cfi.py"
 
 era = "Run2029"
 eventsPerJob = 100
@@ -19,8 +19,9 @@ runLocal = True
 
 turnOffG4Secondary = True
 
-iPtTest = 16 
+iPtTest = 0 
 signTest = -1
+etaRange = (-3,3)
 #########################################
 #########################################
 for iPt in range(0,3):
@@ -32,7 +33,7 @@ for iPt in range(0,3):
         requestName = "SingleMu_ch"+str(sign+1)+"_iPt"+str(iPt)+"_"+outputDatasetTag
 
         process = runCMSDriver(era, withPileUp, generator_fragment)
-        process = adaptGunParameters(process, iPt, sign, turnOffG4Secondary)
+        process = adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary)
         dumpProcess(process, "PSet.py")
 
         prepareCrabCfg(era, eventsPerJob, numberOfJobs,
