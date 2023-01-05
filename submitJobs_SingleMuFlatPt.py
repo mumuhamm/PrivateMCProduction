@@ -9,7 +9,7 @@ genFragmentsDirectory = "Configuration/GenProduction/python/GenFragments/"
 generator_fragment=genFragmentsDirectory+"DoubleMuPt1to100Eta24_cfi.py"
 
 era = "Run2029"
-workAreaName = "tasks_SingleMuOneOverPt"
+workAreaName = "tasks_SingleMuFlatPt"
 eventsPerJob = 100
 numberOfJobs = 10
 outLFNDirBase = "/store/user/akalinow/OMTF/"
