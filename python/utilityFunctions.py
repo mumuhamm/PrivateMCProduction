@@ -18,8 +18,11 @@ eras_conditions = {
 #########################################
 def runCMSDriver(era, withPileUp, generator_fragment):
 
+    # cmsDriver configuration based on following MC request:
+    # https://cms-pdmv.cern.ch/mcm/requests?dataset_name=DYToLL_M-10To50_TuneCP5_14TeV-pythia8&page=0&shown=127
+
     CMSSW_BASE = os.environ.get("CMSSW_BASE")
-    command = "ln -s ${PWD}/GenFragments "+ CMSSW_BASE+"Configuration/GenProduction/python/"
+    command = "ln -s ${PWD}/GenFragments "+ CMSSW_BASE+"/Configuration/GenProduction/python/"
     os.system(command)
     
     premix_switches = "--step GEN,SIM,DIGI,L1,DIGI2RAW "

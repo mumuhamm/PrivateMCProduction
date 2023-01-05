@@ -9,7 +9,9 @@ CMSSW_BASE = os.environ.get("CMSSW_BASE")
 genFragmentsDirectory = "Configuration/GenProduction/python/ThirteenTeV/HSCP/"
 
 generator_fragments = [
-                       "HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py",
+                       #"HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py",
+                       #"HSCPstop_M_1000_TuneCP5_13TeV_pythia8_cff.py",
+                       "HSCPstop_M_2000_TuneCP5_13TeV_pythia8_cff.py"
                        #"HSCPppstau_M_200_TuneZ2star_13TeV_pythia6_cff.py",
                        #"HSCPppstau_M_432_TuneZ2star_13TeV_pythia6_cff.py"                       
                        ]
@@ -23,7 +25,7 @@ outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
 outputDatasetTag = "test_19_12_2022"
 withPileUp = False
-runLocal = False
+runLocal = True
 #########################################
 #########################################
 for aGenFragment in generator_fragments:
@@ -38,7 +40,7 @@ for aGenFragment in generator_fragments:
                   requestName, outputDatasetTag)
 
     if not runLocal:
-        os.system("crab submit --dryrun -c crabTmp.py")
+        os.system("crab submit -c crabTmp.py")
         os.system("rm -f PSet.py* crabTmp.py*")                
 ########################################################
 

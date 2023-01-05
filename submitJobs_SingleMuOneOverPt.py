@@ -5,7 +5,6 @@ import os
 from python.utilityFunctions import *
 #########################################
 #########################################
-CMSSW_BASE = os.environ.get("CMSSW_BASE")
 genFragmentsDirectory = "Configuration/GenProduction/python/GenFragments/"
 generator_fragment=genFragmentsDirectory+"DoubleMuOneOverPt1to100Eta24_cfi.py"
 
@@ -17,7 +16,7 @@ outLFNDirBase = "/store/user/akalinow/OMTF/"
 storage_element="T2_PL_Swierk"
 outputDatasetTag = "test_19_12_2022"
 withPileUp = False
-runLocal = False
+runLocal = True
 
 turnOffG4Secondary = True
 
