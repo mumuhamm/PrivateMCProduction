@@ -11,9 +11,9 @@ genFragmentsDirectory = "Configuration/GenProduction/python/ThirteenTeV/HSCP/"
 generator_fragments = [
                        #"HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py",
                        #"HSCPstop_M_1000_TuneCP5_13TeV_pythia8_cff.py",
-                       "HSCPstop_M_2000_TuneCP5_13TeV_pythia8_cff.py"
+                       #"HSCPstop_M_2000_TuneCP5_13TeV_pythia8_cff.py"
                        #"HSCPppstau_M_200_TuneZ2star_13TeV_pythia6_cff.py",
-                       #"HSCPppstau_M_432_TuneZ2star_13TeV_pythia6_cff.py"                       
+                       "HSCPppstau_M_432_TuneZ2star_13TeV_pythia6_cff.py"                       
                        ]
 
 ##Job steering parameters

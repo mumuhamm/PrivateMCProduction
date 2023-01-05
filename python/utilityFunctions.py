@@ -54,7 +54,7 @@ def runCMSDriver(era, withPileUp, generator_fragment):
     if generator_fragment.find("DoubleMu")==-1:
         command += "--customise SimG4Core/CustomPhysics/Exotica_HSCP_SIM_cfi.customise "
 
-    print(colored("cmsDriver command:","blue"),command)
+    print(colored("cmsDriver command:\n","blue"),command)
     os.system(command)
     from PSet import process
     return process
@@ -66,7 +66,7 @@ def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary):
 
     if iPt>-1:
         ptRanges = [1, 10, 100, 1000]
-        process.source.firstRun = cms.untracked.uint32(iPt)
+        process.source.firstRun = cms.untracked.uint32(iPt+1)
         process.generator.PGunParameters.MinPt = cms.double(ptRanges[iPt-1])
         process.generator.PGunParameters.MaxPt = cms.double(ptRanges[iPt])
         fileName = str(iPt)+"_"+chargeNames[sign+1]
@@ -91,6 +91,20 @@ def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary):
         process.g4SimHits.StackingAction.KillHeavy = cms.bool(True)
         process.g4SimHits.StackingAction.GammaThreshold = cms.double(1E9)
         process.g4SimHits.StackingAction.SaveAllPrimaryDecayProductsAndConversions = cms.untracked.bool(False)
+
+    return process
+#########################################
+#########################################
+def adaptStauGunParameters(process, mass):
+    
+    mass = str(mass)
+    process.FEVTSIMoutput.fileName = process.FEVTSIMoutput.fileName.value().replace('Mu','Stau'+mass)
+    process.customPhysicsSetup.particlesDef = process.customPhysicsSetup.particlesDef.value().replace('432',mass)
+    process.generator.SLHAFileForPythia8 = process.generator.SLHAFileForPythia8.value().replace('432',mass)
+    process.generator.massPoint = cms.untracked.int32(int(mass))
+    process.generator.particleFile = process.generator.particleFile.value().replace('432',mass)
+    process.generator.pdtFile = process.generator.pdtFile.value().replace('432',mass)
+    process.generator.slhaFile = process.generator.slhaFile.value().replace('432',mass)
 
     return process
 #########################################
