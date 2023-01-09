@@ -105,8 +105,25 @@ def adaptStauGunParameters(process, mass):
     process.generator.particleFile = process.generator.particleFile.value().replace('432',mass)
     process.generator.pdtFile = process.generator.pdtFile.value().replace('432',mass)
     process.generator.slhaFile = process.generator.slhaFile.value().replace('432',mass)
-
+    process.customPhysicsSetup.particlesDef = process.customPhysicsSetup.particlesDef.value().replace('432',mass)
+    process.g4SimHits.Physics.particlesDef = process.g4SimHits.Physics.particlesDef.value().replace('432',mass)
     return process
+
+#########################################
+#########################################
+def adaptStopGunParameters(process, mass):
+    
+    mass = str(mass)
+    process.FEVTSIMoutput.fileName = process.FEVTSIMoutput.fileName.value().replace('Mu','Stop'+mass)
+    process.customPhysicsSetup.particlesDef = process.customPhysicsSetup.particlesDef.value().replace('400',mass)
+    process.generator.SLHAFileForPythia8 = process.generator.SLHAFileForPythia8.value().replace('400',mass)
+    process.generator.massPoint = cms.untracked.int32(int(mass))
+    process.generator.particleFile = process.generator.particleFile.value().replace('400',mass)
+    process.generator.pdtFile = process.generator.pdtFile.value().replace('400',mass)
+    process.generator.slhaFile = process.generator.slhaFile.value().replace('400',mass)
+    process.customPhysicsSetup.particlesDef = process.customPhysicsSetup.particlesDef.value().replace('400',mass)
+    process.g4SimHits.Physics.particlesDef = process.g4SimHits.Physics.particlesDef.value().replace('400',mass)
+    return process 
 #########################################
 #########################################
 def dumpProcess(process, fileName):
