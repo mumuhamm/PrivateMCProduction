@@ -39,7 +39,7 @@ for sign in range(-1,1,2):
                     requestName, outputDatasetTag)
 
     if not runLocal:
-        os.system("crab submit --dryrun -c crabTmp.py")
+        os.system("crab submit -c crabTmp.py")
         os.system("rm -f PSet.py* crabTmp.py*")                
 ########################################################
 

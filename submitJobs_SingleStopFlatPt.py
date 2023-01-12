@@ -46,6 +46,6 @@ for iPt in range(0,3):
                     requestName, outputDatasetTag)
 
         if not runLocal:
-            os.system("crab submit --dryrun -c crabTmp.py")
+            os.system("crab submit -c crabTmp.py")
             os.system("rm -f PSet.py* crabTmp.py*")                  
 ########################################################

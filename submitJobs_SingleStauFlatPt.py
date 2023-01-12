@@ -10,7 +10,7 @@ generator_fragment=genFragmentsDirectory+"DoubleStau432_Pt1to100Eta24_cfi.py"
 
 era = "Run2029"
 workAreaName = "tasks_SingleHSCPFlatPt"
-eventsPerJob = 100
+eventsPerJob = 5000
 numberOfJobs = 10
 outLFNDirBase = "/store/user/akalinow/OMTF/"
 storage_element="T2_PL_Swierk"
@@ -27,7 +27,7 @@ masses = [100, 126, 156, 200, 247, 300, 308, 370, 400, 432, 494, 500, 530, 557, 
           600, 605, 610, 620, 651, 700, 730, 745, 770, 790, 795, 800, 805, 810, 820, 871, 900, \
           1000, 1029, 1218, 1409, 1599]
 
-mass = 532
+mass = 432
 #########################################
 #########################################
 for iPt in range(0,3):
@@ -48,6 +48,6 @@ for iPt in range(0,3):
                     requestName, outputDatasetTag)
 
         if not runLocal:
-            os.system("crab submit --dryrun -c crabTmp.py")
+            os.system("crab submit -c crabTmp.py")
             os.system("rm -f PSet.py* crabTmp.py*")                  
 ########################################################
