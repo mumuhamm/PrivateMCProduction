@@ -12,8 +12,8 @@ generator = cms.EDFilter(
     comEnergy = cms.double(13000), 
     SLHAFileForPythia8 = cms.string('Configuration/Generator/data/HSCP_stop_400_SLHA.spc'), 
 
-    hscpFlavor = cms.untracked.string('stau'),
-    massPoint = cms.untracked.int32(432),
+    hscpFlavor = cms.untracked.string('stop'),
+    massPoint = cms.untracked.int32(400),
     particleFile = cms.untracked.string('Configuration/Generator/data/particles_stop_400_GeV.txt'),
     slhaFile = cms.untracked.string('Configuration/Generator/data/HSCP_stop_400_SLHA.spc'),
     processFile = cms.untracked.string('SimG4Core/CustomPhysics/data/stophadronProcessList.txt'),
