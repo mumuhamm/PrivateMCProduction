@@ -90,8 +90,7 @@ def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary):
         process.g4SimHits.StackingAction.KillGamma = cms.bool(True)
         process.g4SimHits.StackingAction.KillHeavy = cms.bool(True)
         process.g4SimHits.StackingAction.GammaThreshold = cms.double(1E9)
-        process.g4SimHits.StackingAction.SaveAllPrimaryDecayProductsAndConversions = cms.untracked.bool(False)
-
+        process.g4SimHits.StackingAction.SaveAllPrimaryDecayProductsAndConversions = cms.untracked.bool(False) 
     return process
 #########################################
 #########################################
@@ -127,6 +126,8 @@ def adaptStopGunParameters(process, mass):
 #########################################
 #########################################
 def dumpProcess(process, fileName):
+
+    process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(1000)
 
     out = open(fileName,'w')
     out.write(process.dumpPython())

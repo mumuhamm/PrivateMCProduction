@@ -3,10 +3,10 @@ import os, re, commands
 import json
 
 cernboxPath = "gsiftp://eosuserftp.cern.ch//eos/user/a/akalinow/" 
-cis_endpoint = "gsiftp://se.cis.gov.pl:2811"
+cis_endpoint = "gsiftp://se.cis.gov.pl"
 
-directories = [
-    "//dpm/cis.gov.pl/home/cms/store/user/jwiechni/HSCP/Run2029_Marianna_14_12_2022/"    
+directories = [    
+    "//dpm/cis.gov.pl/home/cms/store/user/jwiechni/HSCP/ag_12_01_2023/"
 ]
 
 destinationPath = "/Data/HSCP/"
