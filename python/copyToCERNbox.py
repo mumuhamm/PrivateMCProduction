@@ -3,7 +3,7 @@ import os, re, commands
 import json
 
 cernboxPath = "gsiftp://eosuserftp.cern.ch//eos/user/a/akalinow/" 
-cis_endpoint = "gsiftp://se.cis.gov.pl"
+cis_endpoint = "https://se.cis.gov.pl"
 
 directories = [    
     "//dpm/cis.gov.pl/home/cms/store/user/jwiechni/HSCP/ag_12_01_2023/"
