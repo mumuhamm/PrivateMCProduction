@@ -63,6 +63,7 @@ def runCMSDriver(era, withPileUp, generator_fragment):
 def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary):
 
     chargeNames = ["m", "p"]
+    pdgIdMap = {"mu":13, "stau":1000015, "stop":1000006}
 
     if iPt>-1:
         ptRanges = [1, 10, 100, 1000]
@@ -82,10 +83,7 @@ def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary):
     elif hasattr(process.generator.PGunParameters, "ParticleID"): #Py8 guns
         process.generator.PGunParameters.ParticleID = [-sign*13] #muon
         if hasattr(process.generator, "hscpFlavor"):
-            if process.generator.hscpFlavor.value() == 'stau':
-                process.generator.PGunParameters.ParticleID = [-sign*1000015]
-            elif process.generator.hscpFlavor.value() == 'stop':
-                process.generator.PGunParameters.ParticleID = [-sign*1000006]
+            process.generator.PGunParameters.ParticleID = [-sign*pdgIdMap[process.generator.hscpFlavor.value()]]
     process.generator.PGunParameters.MinPhi = -math.pi
     process.generator.PGunParameters.MaxPhi = math.pi
     process.generator.PGunParameters.MinEta = etaRange[0]
