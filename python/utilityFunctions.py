@@ -51,7 +51,7 @@ def runCMSDriver(era, withPileUp, generator_fragment):
     command += "--nThreads 1 "
     command += "--python_filename PSet.py -n 2 --no_exec "    
 
-    if generator_fragment.find("DoubleMu")==-1:
+    if generator_fragment.find("DoubleMu")==-1 and generator_fragment.find("DoubleDisplacedMu")==-1:
         command += "--customise SimG4Core/CustomPhysics/Exotica_HSCP_SIM_cfi.customise "
 
     print(colored("cmsDriver command:\n","blue"),command)
@@ -60,7 +60,7 @@ def runCMSDriver(era, withPileUp, generator_fragment):
     return process
 #########################################
 #########################################
-def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary):
+def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary, dxyRange=None):
 
     chargeNames = ["m", "p"]
     pdgIdMap = {"mu":13, "stau":1000015, "stop":1000006}
@@ -92,7 +92,11 @@ def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary):
         process.generator.AddAntiParticle = False
     elif hasattr(process.generator.PGunParameters, "AddAntiParticle"): #Py8 guns
         process.generator.PGunParameters.AddAntiParticle = False
-
+    if dxyRange != None:
+        #set displacement
+        process.generator.PGunParameters.dxyMin = dxyRange[0]
+        process.generator.PGunParameters.dxyMax = dxyRange[1]
+        process.FEVTSIMoutput.fileName = 'Displaced'+process.FEVTSIMoutput.fileName.value()
 
     if turnOffG4Secondary:
         print(colored("Switching off secondaries in G4","red"))
