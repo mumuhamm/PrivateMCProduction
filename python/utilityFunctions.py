@@ -68,16 +68,16 @@ def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary):
     if iPt>-1:
         ptRanges = [1, 10, 100, 1000]
         process.source.firstRun = cms.untracked.uint32(iPt+1)
-        process.generator.PGunParameters.MinPt = cms.double(ptRanges[iPt])
-        process.generator.PGunParameters.MaxPt = cms.double(ptRanges[iPt+1])
+        process.generator.PGunParameters.MinPt = ptRanges[iPt]
+        process.generator.PGunParameters.MaxPt = ptRanges[iPt+1]
         fileName = str(iPt)+"_"+chargeNames[sign+1]
-        process.FEVTSIMoutput.fileName =  cms.untracked.string('SingleMu'+"_"+fileName+'.root')
+        process.FEVTSIMoutput.fileName =  'SingleMu'+"_"+fileName+'.root'
     else:
         process.source.firstRun = cms.untracked.uint32(1)
         process.generator.PGunParameters.MinOneOverPt = 1.0/100.0
         process.generator.PGunParameters.MaxOneOverPt = 1.0/1.0
         fileName = "OneOverPt_1_100_"+chargeNames[sign+1]
-        process.FEVTSIMoutput.fileName =  cms.untracked.string('SingleMu'+"_"+fileName+'.root')
+        process.FEVTSIMoutput.fileName =  'SingleMu'+"_"+fileName+'.root'
     if hasattr(process.generator.PGunParameters, "PartID"): #HepMC guns
         process.generator.PGunParameters.PartID = [-sign*13] #muon assumed for HepMC gun
     elif hasattr(process.generator.PGunParameters, "ParticleID"): #Py8 guns
