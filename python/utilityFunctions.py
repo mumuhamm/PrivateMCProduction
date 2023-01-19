@@ -67,30 +67,43 @@ def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary):
     if iPt>-1:
         ptRanges = [1, 10, 100, 1000]
         process.source.firstRun = cms.untracked.uint32(iPt+1)
-        process.generator.PGunParameters.MinPt = cms.double(ptRanges[iPt-1])
-        process.generator.PGunParameters.MaxPt = cms.double(ptRanges[iPt])
+        process.generator.PGunParameters.MinPt = cms.double(ptRanges[iPt])
+        process.generator.PGunParameters.MaxPt = cms.double(ptRanges[iPt+1])
         fileName = str(iPt)+"_"+chargeNames[sign+1]
         process.FEVTSIMoutput.fileName =  cms.untracked.string('SingleMu'+"_"+fileName+'.root')
     else:
         process.source.firstRun = cms.untracked.uint32(1)
-        process.generator.PGunParameters.MinOneOverPt = cms.double(1.0/100.0)
-        process.generator.PGunParameters.MaxOneOverPt = cms.double(1.0/1.0)
+        process.generator.PGunParameters.MinOneOverPt = 1.0/100.0
+        process.generator.PGunParameters.MaxOneOverPt = 1.0/1.0
         fileName = "OneOverPt_1_100_"+chargeNames[sign+1]
         process.FEVTSIMoutput.fileName =  cms.untracked.string('SingleMu'+"_"+fileName+'.root')
-    process.generator.PGunParameters.PartID = cms.vint32(-sign*13)
-    process.generator.PGunParameters.MinPhi = cms.double(-math.pi)
-    process.generator.PGunParameters.MaxPhi = cms.double(math.pi)
-    process.generator.PGunParameters.MinEta = cms.double(etaRange[0])
-    process.generator.PGunParameters.MaxEta = cms.double(etaRange[1])
-    process.generator.PGunParameters.AddAntiParticle = cms.bool(False)
+    if hasattr(process.generator.PGunParameters, "PartID"): #HepMC guns
+        process.generator.PGunParameters.PartID = [-sign*13] #muon assumed for HepMC gun
+    elif hasattr(process.generator.PGunParameters, "ParticleID"): #Py8 guns
+        process.generator.PGunParameters.ParticleID = [-sign*13] #muon
+        if hasattr(process.generator, "hscpFlavor"):
+            if process.generator.hscpFlavor.value() == 'stau':
+                process.generator.PGunParameters.ParticleID = [-sign*1000015]
+            elif process.generator.hscpFlavor.value() == 'stop':
+                process.generator.PGunParameters.ParticleID = [-sign*1000006]
+    process.generator.PGunParameters.MinPhi = -math.pi
+    process.generator.PGunParameters.MaxPhi = math.pi
+    process.generator.PGunParameters.MinEta = etaRange[0]
+    process.generator.PGunParameters.MaxEta = etaRange[1]
+    if hasattr(process.generator, "AddAntiParticle"): #HepMC guns
+        process.generator.AddAntiParticle = False
+    elif hasattr(process.generator.PGunParameters, "AddAntiParticle"): #Py8 guns
+        process.generator.PGunParameters.AddAntiParticle = False
+
 
     if turnOffG4Secondary:
         print(colored("Switching off secondaries in G4","red"))
-        process.g4SimHits.StackingAction.KillDeltaRay = cms.bool(True)
-        process.g4SimHits.StackingAction.KillGamma = cms.bool(True)
-        process.g4SimHits.StackingAction.KillHeavy = cms.bool(True)
-        process.g4SimHits.StackingAction.GammaThreshold = cms.double(1E9)
-        process.g4SimHits.StackingAction.SaveAllPrimaryDecayProductsAndConversions = cms.untracked.bool(False) 
+        process.g4SimHits.StackingAction.KillDeltaRay = True
+        process.g4SimHits.StackingAction.KillGamma = True
+        process.g4SimHits.StackingAction.KillHeavy = True
+        process.g4SimHits.StackingAction.GammaThreshold = 1E9
+        process.g4SimHits.StackingAction.SaveAllPrimaryDecayProductsAndConversions = False
+
     return process
 #########################################
 #########################################
@@ -100,7 +113,7 @@ def adaptStauGunParameters(process, mass):
     process.FEVTSIMoutput.fileName = process.FEVTSIMoutput.fileName.value().replace('Mu','Stau'+mass)
     process.customPhysicsSetup.particlesDef = process.customPhysicsSetup.particlesDef.value().replace('432',mass)
     process.generator.SLHAFileForPythia8 = process.generator.SLHAFileForPythia8.value().replace('432',mass)
-    process.generator.massPoint = cms.untracked.int32(int(mass))
+    process.generator.massPoint = int(mass)
     process.generator.particleFile = process.generator.particleFile.value().replace('432',mass)
     process.generator.pdtFile = process.generator.pdtFile.value().replace('432',mass)
     process.generator.slhaFile = process.generator.slhaFile.value().replace('432',mass)
@@ -116,7 +129,7 @@ def adaptStopGunParameters(process, mass):
     process.FEVTSIMoutput.fileName = process.FEVTSIMoutput.fileName.value().replace('Mu','Stop'+mass)
     process.customPhysicsSetup.particlesDef = process.customPhysicsSetup.particlesDef.value().replace('400',mass)
     process.generator.SLHAFileForPythia8 = process.generator.SLHAFileForPythia8.value().replace('400',mass)
-    process.generator.massPoint = cms.untracked.int32(int(mass))
+    process.generator.massPoint = int(mass)
     process.generator.particleFile = process.generator.particleFile.value().replace('400',mass)
     process.generator.pdtFile = process.generator.pdtFile.value().replace('400',mass)
     process.generator.slhaFile = process.generator.slhaFile.value().replace('400',mass)
