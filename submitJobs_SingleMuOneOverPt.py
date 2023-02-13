@@ -18,7 +18,7 @@ outputDatasetTag = "test_19_12_2022"
 withPileUp = False
 runLocal = True
 
-turnOffG4Secondary = True
+turnOffG4Secondary = False
 
 signTest = -1
 etaRange = (-3,3)

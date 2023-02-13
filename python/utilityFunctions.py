@@ -12,7 +12,7 @@ pileup_inputs = {
 #########################################
 #########################################
 eras_conditions = {
-    "Run2029":"--era Phase2C9  --conditions 123X_mcRun4_realistic_v3 --geometry Extended2026D49",
+    "Run2029":"--era Phase2C17I13M9  --conditions 125X_mcRun4_realistic_v2 --geometry Extended2026D88",
     }
 #########################################
 #########################################
@@ -20,12 +20,21 @@ def runCMSDriver(era, withPileUp, generator_fragment):
 
     # cmsDriver configuration based on following MC request:
     # https://cms-pdmv.cern.ch/mcm/requests?dataset_name=DYToLL_M-10To50_TuneCP5_14TeV-pythia8&page=0&shown=127
+    
+   
+    # cmsDriver configuration based on following MC request:
+    #GEN_SIM: 
+    #https://cms-pdmv.cern.ch/mcm/requests?prepid=TSG-Phase2Fall22GS-00004
+    #
+    #DIGI-RECO
+    #https://cms-pdmv.cern.ch/mcm/requests?prepid=TSG-Phase2Fall22DRMiniAOD-00060
 
+# cmsDriver command
     CMSSW_BASE = os.environ.get("CMSSW_BASE")
     command = "ln -s ${PWD}/GenFragments "+ CMSSW_BASE+"/src/Configuration/GenProduction/python/"
     os.system(command)
     
-    premix_switches = "--step GEN,SIM,DIGI,L1,DIGI2RAW "
+    premix_switches = "--step GEN,SIM,DIGI,L1,DIGI2RAW,HLT:@fake2,RAW2DIGI,RECO,RECOSIM,PAT "
     if withPileUp:
          premix_switches = premix_switches.replace("DIGI","DIGI,DATAMIX")
          premix_switches += pileup_inputs[era]+" "
@@ -34,12 +43,12 @@ def runCMSDriver(era, withPileUp, generator_fragment):
     if era=="Run2029":
         premix_switches = premix_switches.replace("DIGI,L1","DIGI,L1TrackTrigger,L1")
         premix_switches += "--beamspot HLLHC14TeV "
-        premix_switches += "--customise_commands 'process.VtxSmeared.BunchLengthInm = cms.double(0.035)' "
         premix_switches += "--customise SLHCUpgradeSimulations/Configuration/aging.customise_aging_1000 "
         premix_switches += "--customise L1Trigger/Configuration/customisePhase2TTOn110.customisePhase2TTOn110 "
         premix_switches += "--customise Configuration/DataProcessing/Utils.addMonitoring "
         premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_L1TkMuonsGmt "
-        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_outputCommands "     
+        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_outputCommands "
+        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_extra_outputCommands " 
 
     command = "cmsDriver.py " 
     command += generator_fragment+" "
