@@ -10,18 +10,19 @@ generator_fragment=genFragmentsDirectory+"DoubleMuOneOverPt1to100Eta24_cfi.py"
 
 era = "Run2029"
 workAreaName = "tasks_SingleMuOneOverPt"
-eventsPerJob = 100
+eventsPerJob = 1000
 numberOfJobs = 10
 outLFNDirBase = "/store/user/akalinow/OMTF/"
-storage_element="T2_PL_Swierk"
-outputDatasetTag = "test_19_12_2022"
+#storage_element="T2_PL_Swierk"
+storage_element="T3_CH_CERNBOX"
+outputDatasetTag = "test_13_02_2023"
 withPileUp = False
 runLocal = True
 
 turnOffG4Secondary = False
 
 signTest = -1
-etaRange = (-3,3)
+etaRange = (-2.5,2.5)
 #########################################
 #########################################
 for sign in range(-1,1,2):
