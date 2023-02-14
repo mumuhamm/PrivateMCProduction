@@ -10,7 +10,7 @@ config.General.transferLogs = True
 config.section_("JobType")
 config.JobType.pluginName = 'PrivateMC'
 config.JobType.psetName = 'PSet.py'
-config.JobType.maxMemoryMB = 2000
+config.JobType.maxMemoryMB = 4000
 
 config.section_("Data")
 config.Data.inputDBS = 'global'

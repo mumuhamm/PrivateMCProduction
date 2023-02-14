@@ -177,7 +177,7 @@ def prepareCrabCfg(workAreaName,
     config.JobType.pluginName = 'PrivateMC'
     config.JobType.psetName = 'PSet.py'
     config.JobType.numCores = 1
-    config.JobType.maxMemoryMB = 2500
+    config.JobType.maxMemoryMB = 3000
     
     config.General.requestName = requestName
     config.General.workArea = workAreaName

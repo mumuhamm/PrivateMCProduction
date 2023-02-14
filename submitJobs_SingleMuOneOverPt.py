@@ -12,10 +12,10 @@ era = "Run2029"
 workAreaName = "tasks_SingleMuOneOverPt"
 eventsPerJob = 1000
 numberOfJobs = 10
-outLFNDirBase = "/store/user/akalinow/OMTF/"
+outLFNDirBase = "/store/user/akalinow/Data/OMTF/"
 #storage_element="T2_PL_Swierk"
 storage_element="T3_CH_CERNBOX"
-outputDatasetTag = "test_13_02_2023"
+outputDatasetTag = "test_14_02_2023_1"
 withPileUp = False
 runLocal = True
 
