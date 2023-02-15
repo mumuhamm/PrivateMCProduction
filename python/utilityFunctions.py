@@ -35,10 +35,11 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     os.system(command)
     
     
-    premix_switches = "--step GEN,SIM,DIGI,L1 "
+    premix_switches = "--step GEN,SIM,DIGI,L1"
     if withReco:
-        premix_switches += ",DIGI2RAW,HLT:@fake2,RAW2DIGI,RECO,RECOSIM,PAT "
-        
+        premix_switches += ",DIGI2RAW,HLT:@fake2,RAW2DIGI,RECO,RECOSIM "
+    else:
+        premix_switches += " "
     if withPileUp:
          premix_switches = premix_switches.replace("DIGI","DIGI,DATAMIX")
          premix_switches += pileup_inputs[era]+" "

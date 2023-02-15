@@ -25,6 +25,7 @@ outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
 outputDatasetTag = "test_19_12_2022"
 withPileUp = False
+withReco = False
 runLocal = True
 #########################################
 #########################################
@@ -32,7 +33,7 @@ for aGenFragment in generator_fragments:
 
     requestName = aGenFragment.split("cff")[0].rstrip("_")
     requestName+="_"+outputDatasetTag
-    process = runCMSDriver(era, withPileUp, genFragmentsDirectory+aGenFragment)
+    process = runCMSDriver(era, withPileUp, withReco, genFragmentsDirectory+aGenFragment)
     dumpProcess(process, "PSet.py")
 
     prepareCrabCfg(workAreaName, eventsPerJob, numberOfJobs,

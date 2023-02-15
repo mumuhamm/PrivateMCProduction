@@ -16,6 +16,7 @@ outLFNDirBase = "/store/user/akalinow/OMTF/"
 storage_element="T2_PL_Swierk"
 outputDatasetTag = "11_01_2023"
 withPileUp = False
+withReco = False
 runLocal = False
 
 turnOffG4Secondary = True
@@ -33,7 +34,7 @@ for iPt in range(0,3):
 
         requestName = "SingleMu_ch"+str(sign+1)+"_iPt"+str(iPt)+"_"+outputDatasetTag
 
-        process = runCMSDriver(era, withPileUp, generator_fragment)
+        process = runCMSDriver(era, withPileUp, withReco, generator_fragment)
         process = adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary)
         dumpProcess(process, "PSet.py")
 

@@ -10,13 +10,14 @@ generator_fragment=genFragmentsDirectory+"DoubleMuOneOverPt1to100Eta24_cfi.py"
 
 era = "Run2029"
 workAreaName = "tasks_SingleMuOneOverPt"
-eventsPerJob = 1000
-numberOfJobs = 10
-outLFNDirBase = "/store/user/akalinow/Data/OMTF/"
+eventsPerJob = 10000
+numberOfJobs = 100
+outLFNDirBase = "/store/user/akalinow/Data/SingleMu/"
 #storage_element="T2_PL_Swierk"
-saaatorage_element="T3_CH_CERNBOX"
-outputDatasetTag = "test_14_02_2023_1"
+storage_element="T3_CH_CERNBOX"
+outputDatasetTag = "12_5_2_p1_15_02_2023"
 withPileUp = False
+withReco = False
 runLocal = True
 
 turnOffG4Secondary = False
@@ -31,7 +32,7 @@ for sign in range(-1,1,2):
 
     requestName = "SingleMu_ch"+str(sign+1)+"_OneOverPt"+"_"+outputDatasetTag
 
-    process = runCMSDriver(era, withPileUp, generator_fragment)
+    process = runCMSDriver(era, withPileUp, withReco, generator_fragment)
     process = adaptGunParameters(process, -1, sign, etaRange, turnOffG4Secondary)
     dumpProcess(process, "PSet.py")
 
