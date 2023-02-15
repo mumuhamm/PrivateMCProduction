@@ -16,7 +16,7 @@ eras_conditions = {
     }
 #########################################
 #########################################
-def runCMSDriver(era, withPileUp, generator_fragment):
+def runCMSDriver(era, withPileUp, withReco, generator_fragment):
 
     # cmsDriver configuration based on following MC request:
     # https://cms-pdmv.cern.ch/mcm/requests?dataset_name=DYToLL_M-10To50_TuneCP5_14TeV-pythia8&page=0&shown=127
@@ -34,8 +34,11 @@ def runCMSDriver(era, withPileUp, generator_fragment):
     command = "ln -s ${PWD}/GenFragments "+ CMSSW_BASE+"/src/Configuration/GenProduction/python/"
     os.system(command)
     
-    #premix_switches = "--step GEN,SIM,DIGI,L1,DIGI2RAW,HLT:@fake2,RAW2DIGI,RECO,RECOSIM,PAT "
+    
     premix_switches = "--step GEN,SIM,DIGI,L1 "
+    if withReco:
+        premix_switches += ",DIGI2RAW,HLT:@fake2,RAW2DIGI,RECO,RECOSIM,PAT "
+        
     if withPileUp:
          premix_switches = premix_switches.replace("DIGI","DIGI,DATAMIX")
          premix_switches += pileup_inputs[era]+" "
@@ -49,7 +52,9 @@ def runCMSDriver(era, withPileUp, generator_fragment):
         premix_switches += "--customise Configuration/DataProcessing/Utils.addMonitoring "
         premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_L1TkMuonsGmt "
         premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_outputCommands "
-        #premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_extra_outputCommands " 
+              
+    if withReco:
+        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_extra_outputCommands " 
 
     command = "cmsDriver.py " 
     command += generator_fragment+" "
