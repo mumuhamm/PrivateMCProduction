@@ -78,7 +78,7 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
 #########################################
 def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary, dxyRange=None):
 
-    chargeNames = ["m", "p"]
+    chargeNames = ["m", "", "p"]
     pdgIdMap = {"mu":13, "stau":1000015, "stop":1000006}
 
     if iPt>-1:
