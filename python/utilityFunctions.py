@@ -86,12 +86,12 @@ def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary, dxyRang
         process.source.firstRun = cms.untracked.uint32(iPt+1)
         process.generator.PGunParameters.MinPt = ptRanges[iPt]
         process.generator.PGunParameters.MaxPt = ptRanges[iPt+1]
-        fileName = str(iPt)+"_"+chargeNames[sign+1]
+        fileName = "iPt_"+str(iPt)+"_"+chargeNames[sign+1]
         process.FEVTSIMoutput.fileName =  'SingleMu'+"_"+fileName+'.root'
     else:
         process.source.firstRun = cms.untracked.uint32(1)
         process.generator.PGunParameters.MinOneOverPt = 1.0/100.0
-        process.generator.PGunParameters.MaxOneOverPt = 1.0/1.0
+        process.generator.PGunParameters.MaxOneOverPt = 1.0/1.5
         fileName = "OneOverPt_1_100_"+chargeNames[sign+1]
         process.FEVTSIMoutput.fileName =  'SingleMu'+"_"+fileName+'.root'
     if hasattr(process.generator.PGunParameters, "PartID"): #HepMC guns
