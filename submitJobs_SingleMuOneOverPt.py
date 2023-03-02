@@ -10,12 +10,12 @@ generator_fragment=genFragmentsDirectory+"DoubleMuOneOverPt1to100Eta24_cfi.py"
 
 era = "Run2029"
 workAreaName = "tasks_SingleMuOneOverPt"
-eventsPerJob = 8000
-numberOfJobs = 100
+eventsPerJob = 5000
+numberOfJobs = 200
 outLFNDirBase = "/store/user/akalinow/Data/SingleMu/"
 #storage_element="T2_PL_Swierk"
 storage_element="T3_CH_CERNBOX"
-outputDatasetTag = "12_5_2_p1_15_02_2023"
+outputDatasetTag = "12_5_2_p1_22_02_2023"
 withPileUp = False
 withReco = False
 runLocal = False
