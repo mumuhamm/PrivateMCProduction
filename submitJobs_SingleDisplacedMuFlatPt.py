@@ -24,14 +24,14 @@ turnOffG4Secondary = True
 iPtTest = 0 
 signTest = -1
 etaRange = (-2.5,2.5)
-dxyRange = (0,100)
+dxyRange = (10,100)
 #########################################
 #########################################
 for iPt in range(0,3):
     for sign in range(-1,1,2):
 
-        if iPt!=iPtTest or sign!=signTest:
-            continue  
+        if iPtTest!=None and signTest!=None and (iPt!=iPtTest or sign!=signTest):
+            continue 
 
         requestName = "DisplacedMu_ch"+str(sign+1)+"_iPt"+str(iPt)+"_"+outputDatasetTag
 

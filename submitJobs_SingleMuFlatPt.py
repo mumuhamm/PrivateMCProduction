@@ -10,19 +10,19 @@ generator_fragment=genFragmentsDirectory+"DoubleMuPt1to100Eta24_cfi.py"
 
 era = "Run2029"
 workAreaName = "tasks_SingleMuFlatPt"
-eventsPerJob = 5000
-numberOfJobs = 200
+eventsPerJob = 4000
+numberOfJobs = 500
 outLFNDirBase = "/store/user/akalinow/Data/SingleMu/"
 #storage_element="T2_PL_Swierk"
 storage_element="T3_CH_CERNBOX"
-outputDatasetTag = "12_5_2_p1_22_02_2023"
+outputDatasetTag = "12_5_2_p1_04_04_2023"
 withPileUp = False
 withReco = False
 runLocal = False
 turnOffG4Secondary = False
 
 iPtTest = 0 
-signTest = 1
+signTest = None
 etaRange = (-2.5,2.5)
 #########################################
 #########################################

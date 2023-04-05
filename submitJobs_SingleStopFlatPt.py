@@ -31,9 +31,9 @@ mass = 100
 #########################################
 for iPt in range(0,3):
     for sign in range(-1,1,2):
-
-        if iPt!=iPtTest or sign!=signTest:
-            continue  
+  
+        if iPtTest!=None and signTest!=None and (iPt!=iPtTest or sign!=signTest):
+            continue     
 
         requestName = "SingleStop_ch"+str(sign+1)+"_iPt"+str(iPt)+"_"+outputDatasetTag
 
