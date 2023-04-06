@@ -14,7 +14,6 @@ rm -rf  Configuration/GenProduction/python/ThirteenTeV/DMSIMP_Extensions
 rm -f   Configuration/GenProduction/python/EightTeV/Exotica_HSCP_SIM_cfi.py
 scram b -j 8
 
-
 #07.10.2022
 #https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TPhase2Instructions#CMSSW_12_3_0_pre4
 

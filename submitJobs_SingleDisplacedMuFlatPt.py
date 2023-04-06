@@ -21,10 +21,12 @@ runLocal = True
 
 turnOffG4Secondary = True
 
-iPtTest = 0 
+iPtTest = 1 
 signTest = -1
 etaRange = (-2.5,2.5)
-dxyRange = (10,100)
+dxyRange = (0,10)
+LxyMax = 50.0
+LzMax = 5.0
 #########################################
 #########################################
 for iPt in range(0,3):
@@ -36,7 +38,8 @@ for iPt in range(0,3):
         requestName = "DisplacedMu_ch"+str(sign+1)+"_iPt"+str(iPt)+"_"+outputDatasetTag
 
         process = runCMSDriver(era, withPileUp, withReco, generator_fragment)
-        process = adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary, dxyRange=dxyRange)
+        process = adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary, 
+                                    dxyRange=dxyRange, LxyMax=LxyMax, LzMax=LzMax)
 
         dumpProcess(process, "PSet.py")
 

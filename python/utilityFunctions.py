@@ -76,7 +76,8 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     return process
 #########################################
 #########################################
-def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary, dxyRange=None):
+def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary, 
+                       dxyRange=None, LxyMax=None, LzMax=None):
 
     chargeNames = ["m", "", "p"]
     pdgIdMap = {"mu":13, "stau":1000015, "stop":1000006}
@@ -108,10 +109,12 @@ def adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary, dxyRang
         process.generator.AddAntiParticle = False
     elif hasattr(process.generator.PGunParameters, "AddAntiParticle"): #Py8 guns
         process.generator.PGunParameters.AddAntiParticle = False
-    if dxyRange != None:
+    if dxyRange != None and LxyMax!=None and LzMax!=None:
         #set displacement
         process.generator.PGunParameters.dxyMin = dxyRange[0]
         process.generator.PGunParameters.dxyMax = dxyRange[1]
+        process.generator.PGunParameters.LxyMax = LxyMax
+        process.generator.PGunParameters.LzMax = LzMax
         process.FEVTSIMoutput.fileName = 'Displaced'+process.FEVTSIMoutput.fileName.value()
 
     if turnOffG4Secondary:
