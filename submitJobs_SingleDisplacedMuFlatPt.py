@@ -27,7 +27,7 @@ etaRange = (-3,3)
 ##NOTE: displacement expressed in mm
 dxyRange = (0,100)
 LxyMax = 200
-LzMax = 10
+LzMax = 100
 #########################################
 #########################################
 for iPt in range(0,3):
