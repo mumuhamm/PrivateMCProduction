@@ -14,19 +14,20 @@ eventsPerJob = 5000
 numberOfJobs = 10
 outLFNDirBase = "/store/user/akalinow/OMTF/"
 storage_element="T2_PL_Swierk"
-outputDatasetTag = "11_01_2023"
+outputDatasetTag = "20_06_2023_test"
 withPileUp = False
 withReco = False
 runLocal = True
 
 turnOffG4Secondary = True
 
-iPtTest = 1 
-signTest = -1
-etaRange = (-2.5,2.5)
-dxyRange = (0,10)
-LxyMax = 50.0
-LzMax = 5.0
+iPtTest = None
+signTest = None
+etaRange = (-3,3)
+##NOTE: displacement expressed in mm
+dxyRange = (0,100)
+LxyMax = 200
+LzMax = 10
 #########################################
 #########################################
 for iPt in range(0,3):
