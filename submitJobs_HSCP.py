@@ -32,7 +32,7 @@ runLocal = True
 for aGenFragment in generator_fragments:
 
     requestName = aGenFragment.split("cff")[0].rstrip("_")
-    requestName+="_"+outputDatasetTag
+    requestName+="_"+era+"_"+outputDatasetTag
     process = runCMSDriver(era, withPileUp, withReco, genFragmentsDirectory+aGenFragment)
     dumpProcess(process, "PSet.py")
 

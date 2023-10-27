@@ -32,12 +32,12 @@ mass = 432
 #########################################
 #########################################
 for iPt in range(0,3):
-    for sign in range(-1,1,2):
+    for sign in range(-1,2,2):
 
         if iPtTest!=None and signTest!=None and (iPt!=iPtTest or sign!=signTest):
             continue         
 
-        requestName = "SingleStau_ch"+str(sign+1)+"_iPt"+str(iPt)+"_"+outputDatasetTag
+        requestName = "SingleStau_ch"+str(sign+1)+"_iPt"+str(iPt)+"_"+era+"_"+outputDatasetTag
 
         process = runCMSDriver(era, withPileUp, withReco, generator_fragment)
         process = adaptGunParameters(process, iPt, sign, etaRange, turnOffG4Secondary)

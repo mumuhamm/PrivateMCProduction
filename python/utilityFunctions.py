@@ -7,12 +7,14 @@ from crab3 import *
 #########################################
 #########################################
 pileup_inputs = {
+    "Run2023":" ",
     "Run2029":" ",
     }
 #########################################
 #########################################
 eras_conditions = {
-    "Run2029":"--era Phase2C17I13M9  --conditions 125X_mcRun4_realistic_v2 --geometry Extended2026D88",
+    "Run2023":"--era Run3_2023  --conditions 131X_mcRun3_2023_realistic_v10 --geometry DB:Extended",
+    "Run2029":"--era Phase2C17I13M9  --conditions 131X_mcRun4_realistic_v7 --geometry Extended2026D99",
     }
 #########################################
 #########################################
@@ -23,11 +25,18 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     
    
     # cmsDriver configuration based on following MC request:
+    #2029 setup:
     #GEN_SIM: 
     #https://cms-pdmv.cern.ch/mcm/requests?prepid=TSG-Phase2Fall22GS-00004
     #
     #DIGI-RECO
     #https://cms-pdmv.cern.ch/mcm/requests?prepid=TSG-Phase2Fall22DRMiniAOD-00060
+    
+    #2023 setup:
+    #GEN-SIM:
+    #https://cms-pdmv.cern.ch/mcm/requests?prepid=BTV-Run3Summer23GS-00031
+    #DIGI-RECO
+    
 
 # cmsDriver command
     CMSSW_BASE = os.environ.get("CMSSW_BASE")
@@ -44,6 +53,11 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
          premix_switches = premix_switches.replace("DIGI","DIGI,DATAMIX")
          premix_switches += pileup_inputs[era]+" "
          premix_switches += "--procModifiers premix_stage2 --datamix PreMix "
+         
+    if era=="Run2023":
+        premix_switches += "--beamspot Realistic25ns13p6TeVEarly2023Collision "
+        premix_switches += "--customise Configuration/DataProcessing/Utils.addMonitoring "
+        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_outputCommands "  
 
     if era=="Run2029":
         premix_switches = premix_switches.replace("DIGI,L1","DIGI,L1TrackTrigger,L1")
