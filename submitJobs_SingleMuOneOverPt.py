@@ -9,12 +9,14 @@ genFragmentsDirectory = "Configuration/GenProduction/python/GenFragments/"
 generator_fragment=genFragmentsDirectory+"DoubleMuOneOverPt1to100Eta24_cfi.py"
 
 era = "Run2023"
-workAreaName = "tasks_SingleMuOneOverPt"
+workAreaName = "tasks_SingleMuOneOverPt_GPExtrapolation2024_NegativeEta"
 eventsPerJob = 4000
-numberOfJobs = 500
-outLFNDirBase = "/store/user/akalinow/Data/SingleMu/"
-storage_element="T3_CH_CERNBOX"
-outputDatasetTag = "13_1_0_03_10_2023"
+numberOfJobs = 1000
+#outLFNDirBase ="/store/user/akalinow/Data/SingleMu/"
+outLFNDirBase = "/store/group/dpg_trigger/comm_trigger/L1Trigger/OMTF/"
+#outLFNDirBase = "/store/user/almuhamm/"
+storage_element="T2_CH_CERN"
+outputDatasetTag = "13_1_0_11_03_2024"
 withPileUp = False
 withReco = False
 runLocal = False
@@ -25,12 +27,13 @@ signTest = None
 #etaRange = (-2.5,2.5)
 #etaRange = (0.8,1.35)
 etaRange = (-1.35,-0.8)
+#etaRange = (-3.0, 3.0)
 #########################################
 #########################################
 for sign in range(-1,2,2):
 
-    if signTest!=None and sign!=signTest:
-        continue  
+    #if signTest!=None and sign!=signTest:
+    #    continue  
 
     requestName = "SingleMu_ch"+str(sign+1)+"_OneOverPt"+"_"+era+"_"+outputDatasetTag
 

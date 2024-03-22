@@ -57,7 +57,10 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     if era=="Run2023":
         premix_switches += "--beamspot Realistic25ns13p6TeVEarly2023Collision "
         premix_switches += "--customise Configuration/DataProcessing/Utils.addMonitoring "
-        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_outputCommands "  
+        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_GoldenPattern "
+        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_L1TkMuonsGmt "
+        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_outputCommands "
+        
 
     if era=="Run2029":
         premix_switches = premix_switches.replace("DIGI,L1","DIGI,L1TrackTrigger,L1")
@@ -65,6 +68,7 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
         premix_switches += "--customise SLHCUpgradeSimulations/Configuration/aging.customise_aging_1000 "
         premix_switches += "--customise L1Trigger/Configuration/customisePhase2TTOn110.customisePhase2TTOn110 "
         premix_switches += "--customise Configuration/DataProcessing/Utils.addMonitoring "
+        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_GoldenPattern "
         premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_L1TkMuonsGmt "
         premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_outputCommands "
               
