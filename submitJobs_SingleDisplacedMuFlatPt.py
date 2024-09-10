@@ -8,13 +8,13 @@ from python.utilityFunctions import *
 genFragmentsDirectory = "Configuration/GenProduction/python/GenFragments/"
 generator_fragment=genFragmentsDirectory+"DoubleDisplacedMuPt1to100Eta24Dxy0to100_cfi.py"
 
-era = "Run2023"
-workAreaName = "tasks_SingleDisplacedMuFlatPt_Dxy5m_Run3"
+era = "Run2029"
+workAreaName = "tasks_SingleDisplacedMuFlatPt_Dxy5m_RunPhaseII_EtaMod3"
 eventsPerJob = 5000
-numberOfJobs = 300
-outLFNDirBase = "/store/user/almuhamm/ZMu_Test/Displaced"
-storage_element="T3_CH_CERNBOX"
-outputDatasetTag = "13_1_0_05_02_2024_Dxy5m_Run3"
+numberOfJobs = 400
+outLFNDirBase = "/store/group/dpg_trigger/comm_trigger/L1Trigger/OMTF/"
+storage_element="T2_CH_CERN"
+outputDatasetTag = "14_1_0pre4_11_06_2024_Dxy5m_Run3"
 withPileUp = False
 withReco = False
 runLocal = False

@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 
-import os
 
-from python.utilityFunctions import *
-#########################################
-#########################################
-CMSSW_BASE = os.environ.get("CMSSW_BASE")
 genFragmentsDirectory = "Configuration/GenProduction/python/ThirteenTeV/HSCP/"
 
 generator_fragments = [

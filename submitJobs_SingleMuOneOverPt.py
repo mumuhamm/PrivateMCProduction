@@ -8,15 +8,15 @@ from python.utilityFunctions import *
 genFragmentsDirectory = "Configuration/GenProduction/python/GenFragments/"
 generator_fragment=genFragmentsDirectory+"DoubleMuOneOverPt1to100Eta24_cfi.py"
 
-era = "Run2023"
-workAreaName = "tasks_SingleMuOneOverPt_GPExtrapolation2024_NegativeEta"
+era = "Run2029"
+workAreaName = "tasks_SingleMuOneOverPt_GPExtrapolation2024"
 eventsPerJob = 4000
 numberOfJobs = 1000
 #outLFNDirBase ="/store/user/akalinow/Data/SingleMu/"
 outLFNDirBase = "/store/group/dpg_trigger/comm_trigger/L1Trigger/OMTF/"
 #outLFNDirBase = "/store/user/almuhamm/"
 storage_element="T2_CH_CERN"
-outputDatasetTag = "13_1_0_11_03_2024"
+outputDatasetTag = "13_1_0_03_04_2024"
 withPileUp = False
 withReco = False
 runLocal = False
@@ -24,9 +24,9 @@ runLocal = False
 turnOffG4Secondary = False
 
 signTest = None
-#etaRange = (-2.5,2.5)
+etaRange = (-2.5,2.5)
 #etaRange = (0.8,1.35)
-etaRange = (-1.35,-0.8)
+#etaRange = (-1.35,-0.8)
 #etaRange = (-3.0, 3.0)
 #########################################
 #########################################

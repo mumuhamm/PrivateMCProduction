@@ -13,6 +13,7 @@ pileup_inputs = {
 #########################################
 #########################################
 eras_conditions = {
+    "Run2022":"--era Run3  --conditions auto:run3_mc --geometry DB:Extended",
     "Run2023":"--era Run3_2023  --conditions 131X_mcRun3_2023_realistic_v10 --geometry DB:Extended",
     "Run2029":"--era Phase2C17I13M9  --conditions 131X_mcRun4_realistic_v7 --geometry Extended2026D99",
     }
@@ -52,7 +53,14 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     if withPileUp:
          premix_switches = premix_switches.replace("DIGI","DIGI,DATAMIX")
          premix_switches += pileup_inputs[era]+" "
-         premix_switches += "--procModifiers premix_stage2 --datamix PreMix "
+         premix_switches += "--procModifiers premix_stage2 --datamix PreMix"
+
+    if era=="Run2022":
+        premix_switches = premix_switches.replace("DIGI,L1", "DIGI,L1,DIGI2RAW,HLT:@relval2022,RAW2DIGI,RECO,RECOSIM")
+        premix_switches += "--beamspot Realistic25ns13p6TeVEarly2022Collision "
+        premix_switches += "--customise Configuration/DataProcessing/Utils.addMonitoring "
+
+        
          
     if era=="Run2023":
         premix_switches += "--beamspot Realistic25ns13p6TeVEarly2023Collision "
@@ -85,8 +93,20 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     command += "--nThreads 1 "
     command += "--python_filename PSet.py -n 2 --no_exec "    
 
-    if generator_fragment.find("DoubleMu")==-1 and generator_fragment.find("DoubleDisplacedMu")==-1:
-        command += "--customise SimG4Core/CustomPhysics/Exotica_HSCP_SIM_cfi.customise "
+    if era=="Run2022":
+        command = "cmsDriver.py " 
+        command += generator_fragment+" "
+        command += "--processName fullsim "
+        command += "--datatier GEN-SIM-DIGI-RAW-AODSIM " 
+        command += "--fileout file:TSG-Run3Summer22EEGS.root " 
+        command += "--mc --eventcontent AODSIM "
+        command += premix_switches 
+        command += eras_conditions[era] +" "
+        command += "--nThreads 1 "
+        command += "--python_filename PSet.py -n 2 --no_exec "   
+
+    #if generator_fragment.find("DoubleMu")==-1 and generator_fragment.find("DoubleDisplacedMu")==-1:
+    #    command += "--customise SimG4Core/CustomPhysics/Exotica_HSCP_SIM_cfi.customise "
 
     print(colored("cmsDriver command:\n","blue"),command)
     os.system(command)
