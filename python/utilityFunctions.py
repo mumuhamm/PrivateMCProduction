@@ -13,7 +13,7 @@ pileup_inputs = {
 #########################################
 #########################################
 eras_conditions = {
-    "Run2022":"--era Run3  --conditions auto:run3_mc --geometry DB:Extended",
+    "Run2022":"--era Run3  --conditions 140X_mcRun3_2022_realistic_v3 --geometry DB:Extended",
     "Run2023":"--era Run3_2023  --conditions 131X_mcRun3_2023_realistic_v10 --geometry DB:Extended",
     "Run2029":"--era Phase2C17I13M9  --conditions 131X_mcRun4_realistic_v7 --geometry Extended2026D99",
     }
@@ -56,7 +56,7 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
          premix_switches += "--procModifiers premix_stage2 --datamix PreMix"
 
     if era=="Run2022":
-        premix_switches = premix_switches.replace("DIGI,L1", "DIGI,L1,DIGI2RAW,HLT:@relval2022,RAW2DIGI,RECO,RECOSIM")
+        premix_switches = premix_switches.replace("DIGI,L1", "DIGI,DIGI2RAW,HLT:@relval2023,RAW2DIGI,RECO,RECOSIM")
         premix_switches += "--beamspot Realistic25ns13p6TeVEarly2022Collision "
         premix_switches += "--customise Configuration/DataProcessing/Utils.addMonitoring "
 
