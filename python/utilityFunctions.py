@@ -56,7 +56,7 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
          premix_switches += "--procModifiers premix_stage2 --datamix PreMix"
 
     if era=="Run2022":
-        premix_switches = premix_switches.replace("DIGI,L1", "DIGI,DIGI2RAW,HLT:@relval2023,RAW2DIGI,RECO,RECOSIM")
+        premix_switches = premix_switches.replace("DIGI,L1", "DIGI,L1,DIGI2RAW,HLT:2024v14,RAW2DIGI,L1Reco,RECO,RECOSIM")
         premix_switches += "--beamspot Realistic25ns13p6TeVEarly2022Collision "
         premix_switches += "--customise Configuration/DataProcessing/Utils.addMonitoring "
 
@@ -97,8 +97,8 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
         command = "cmsDriver.py " 
         command += generator_fragment+" "
         command += "--processName fullsim "
-        command += "--datatier GEN-SIM-DIGI-RAW-AODSIM " 
-        command += "--fileout file:TSG-Run3Summer22EEGS.root " 
+        command += "--datatier GEN-SIM-RAW-AODSIM " 
+        command += "--fileout file:private_BsToMuMuGamma_Run3Summer22EEGS.root " 
         command += "--mc --eventcontent AODSIM "
         command += premix_switches 
         command += eras_conditions[era] +" "
