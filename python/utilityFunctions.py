@@ -59,7 +59,7 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
         premix_switches = premix_switches.replace("DIGI,L1", "DIGI,L1,DIGI2RAW,HLT:2024v14,RAW2DIGI,L1Reco,RECO,RECOSIM")
         premix_switches += "--beamspot Realistic25ns13p6TeVEarly2022Collision "
         premix_switches += "--customise Configuration/DataProcessing/Utils.addMonitoring "
-
+        premix_switches += "--customise Configuration/GenProduction/GenFragments/privateCustomizations.customize_outputCommands "
         
          
     if era=="Run2023":
