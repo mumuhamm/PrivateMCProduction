@@ -26,13 +26,13 @@ storage_element="T2_CH_CERN"
 outputDatasetTag = "BsToJpsiEta_14_0_15_patch1_02_10_2024"
 withPileUp = False
 withReco = True
-runLocal = False
+runLocal = True
 
 
 #########################################
 for aGenFragment in generator_fragments:
 
-    requestName = aGenFragment.split("00025")[0].rstrip("-")
+    requestName = aGenFragment.split("443221")[0].rstrip("-")
     requestName+="_"+era+"_"+outputDatasetTag
     process = runCMSDriver(era, withPileUp, withReco, genFragmentsDirectory+aGenFragment)
     dumpProcess(process, "PSet.py")

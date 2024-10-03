@@ -18,8 +18,8 @@ generator_fragments= [
 #Job steering parameters
 era = "Run2022"
 workAreaName = "tasks_BsToPhiGamma_MCTunesRun3ECM13p6TeV"
-eventsPerJob = 4000
-numberOfJobs = 500
+eventsPerJob = 5000
+numberOfJobs = 200
 outLFNDirBase = "/store/group/dpg_trigger/comm_trigger/L1Trigger/OMTF/TrackingVertexing/"
 storage_element="T2_CH_CERN"
 outputDatasetTag = "BsToPhiGamma_14_0_15_patch1_02_10_2024"
@@ -31,7 +31,7 @@ runLocal = False
 #########################################
 for aGenFragment in generator_fragments:
 
-    requestName = aGenFragment.split("00025")[0].rstrip("-")
+    requestName = aGenFragment.split("333-22")[0].rstrip("-")
     requestName+="_"+era+"_"+outputDatasetTag
     process = runCMSDriver(era, withPileUp, withReco, genFragmentsDirectory+aGenFragment)
     dumpProcess(process, "PSet.py")
