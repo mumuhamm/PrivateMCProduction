@@ -25,7 +25,7 @@ storage_element="T2_CH_CERN"
 outputDatasetTag = "BsToPhiGamma_14_0_15_patch1_02_10_2024"
 withPileUp = False
 withReco = True
-runLocal = False
+runLocal = True
 
 
 #########################################

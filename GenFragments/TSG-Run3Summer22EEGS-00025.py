@@ -6,7 +6,7 @@ from GeneratorInterface.EvtGenInterface.EvtGenSetting_cff import *
 
 _generator = cms.EDFilter(
     "Pythia8GeneratorFilter",
-    pythiaHepMCVerbosity = cms.untracked.bool(False),
+    pythiaHepMCVerbosity = cms.untracked.bool(True),
     maxEventsToPrint = cms.untracked.int32(0),
     pythiaPylistVerbosity = cms.untracked.int32(0),
     comEnergy = cms.double(13600.0),

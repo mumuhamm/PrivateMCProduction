@@ -22,19 +22,29 @@ _generator = cms.EDFilter(
         parameterSets = cms.vstring('EvtGen130')
     ),
     PythiaParameters = cms.PSet(
-        pythia8CommonSettingsBlock,
-        pythia8CP5SettingsBlock,
-        processParameters = cms.vstring(
-            "SoftQCD:nonDiffractive = on",
-            'PTFilter:filter = on', # this turn on the filter
-            'PTFilter:quarkToFilter = 5', # PDG id of q quark
-            'PTFilter:scaleToFilter = 1.0'),
-        parameterSets = cms.vstring(
-            'pythia8CommonSettings',
-            'pythia8CP5Settings',
-            'processParameters',
-        )
+    pythia8CommonSettingsBlock,
+    pythia8CP5SettingsBlock,
+    processParameters = cms.vstring(
+        "SoftQCD:nonDiffractive = on",
+        'PTFilter:filter = off',
+        'PTFilter:quarkToFilter = 5',# bottom quark 
+        'PTFilter:scaleToFilter = 1.0'
+        #'TimeShower:pTmin = 3.0',  # Increased for soft emission handling
+        #'SpaceShower:pTmin = 3.0',  # Matching minimum pT for space-like showers
+        #'SpaceShower:rapidityOrder = off',  # Avoid too-soft emissions
+        #'MultipartonInteractions:pTmin = 3.0',  # MPI pTmin to avoid low-pT interactions
+        #'MultipartonInteractions:pT0Ref = 2.0',  # Adjust for stability
+        #'PDF:pSet = LHAPDF6:NNPDF31_nnlo_as_0118',  # Use specific PDF set
+        #'SpaceShower:pTminChgQ = 2.0',  # Minimum scale for charged parton emissions
+        #'Variations:doVariations = on',
+        #'HadronLevel:all = on'
+    ),
+    parameterSets = cms.vstring(
+        'pythia8CommonSettings',
+        'pythia8CP5Settings',
+        'processParameters',
     )
+)
 )
 
 from GeneratorInterface.Core.ExternalGeneratorFilter import ExternalGeneratorFilter
@@ -50,12 +60,23 @@ bfilter = cms.EDFilter(
 decayfilter = cms.EDFilter("PythiaAllDauVFilter",
     moduleLabel = cms.untracked.InputTag("generator","unsmeared"),
     verbose         = cms.untracked.int32(1),
-    NumberDaughters = cms.untracked.int32(3),
+    NumberDaughters = cms.untracked.int32(2),
     ParticleID      = cms.untracked.int32(531),
-    DaughterIDs     = cms.untracked.vint32(13, -13, 22),
-    MinPt           = cms.untracked.vdouble(3.5, 3.5, 2.50),
-    MinEta          = cms.untracked.vdouble(-2.5, -2.5, -3.0),
-    MaxEta          = cms.untracked.vdouble( 2.5,  2.5,  3.0)
+    DaughterIDs     = cms.untracked.vint32(333, 22),
+    MinPt           = cms.untracked.vdouble(0,0),
+    MinEta          = cms.untracked.vdouble(-2.5,-3),
+    MaxEta          = cms.untracked.vdouble(2.5,3)
+)
+phifilter = cms.EDFilter("PythiaDauVFilter",
+    DaughterIDs = cms.untracked.vint32(13, -13),
+    MaxEta = cms.untracked.vdouble(2.5, 2.5),
+    MinEta = cms.untracked.vdouble(-2.5, -2.5),
+    MinPt = cms.untracked.vdouble(0,0),
+    MotherID = cms.untracked.int32(531),
+    NumberDaughters = cms.untracked.int32(2),
+    ParticleID = cms.untracked.int32(333),
+    verbose = cms.untracked.int32(1)
 )
 
-ProductionFilterSequence = cms.Sequence(generator*bfilter*decayfilter)
+
+ProductionFilterSequence = cms.Sequence(generator*bfilter*decayfilter*phifilter)
