@@ -17,14 +17,14 @@ generator_fragments= [
 #Job steering parameters
 era = "Run2022"
 workAreaName = "tasks_BsToMuMuGamma_MCTunesRun3ECM13p6TeV"
-eventsPerJob = 10
-numberOfJobs = 4
-outLFNDirBase = "/store/group/dpg_trigger/comm_trigger/L1Trigger/OMTF/"
+eventsPerJob = 4000
+numberOfJobs = 500
+outLFNDirBase = "/store/group/dpg_trigger/comm_trigger/L1Trigger/OMTF/TrackingVertexing/"
 storage_element="T2_CH_CERN"
-outputDatasetTag = "BsToMuMuGamma_14_1_0pre4_11_06_2024"
+outputDatasetTag = "BsToMuMuGamma_14_0_15_patch1_25_09_2024"
 withPileUp = False
-withReco = False
-runLocal = True
+withReco = True
+runLocal = False
 
 
 #########################################

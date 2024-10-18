@@ -53,9 +53,9 @@ decayfilter = cms.EDFilter("PythiaAllDauVFilter",
     NumberDaughters = cms.untracked.int32(3),
     ParticleID      = cms.untracked.int32(531),
     DaughterIDs     = cms.untracked.vint32(13, -13, 22),
-    MinPt           = cms.untracked.vdouble(3.5, 3.5, 2.50),
-    MinEta          = cms.untracked.vdouble(-2.5, -2.5, -3.0),
-    MaxEta          = cms.untracked.vdouble( 2.5,  2.5,  3.0)
+    MinPt           = cms.untracked.vdouble(0.0, 0.0, 0.0),
+    MinEta          = cms.untracked.vdouble(-9999, -9999, -9999),
+    MaxEta          = cms.untracked.vdouble( 9999,  9999,  9999)
 )
 
 ProductionFilterSequence = cms.Sequence(generator*bfilter*decayfilter)

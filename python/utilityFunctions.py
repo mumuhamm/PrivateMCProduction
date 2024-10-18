@@ -98,12 +98,12 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     command += generator_fragment+" "
     command += "--processName fullsim "
     command += "--datatier GEN-SIM-DIGI-RAW-AODSIM " 
-    command += "--fileout file:private_BsToJpsiEta_Run3Summer22EEGS.root " 
+    command += "--fileout file:private_BsToPhiGamma_Run3Summer22EEGS.root " 
     command += "--mc --eventcontent AODSIM "
     command += premix_switches 
     command += eras_conditions[era] +" "
     command += "--nThreads 1 "
-    command += "--python_filename PSet.py -n 100 --no_exec "   
+    command += "--python_filename PSet.py -n 5000 --no_exec "   
 
     #if generator_fragment.find("DoubleMu")==-1 and generator_fragment.find("DoubleDisplacedMu")==-1:
     #    command += "--customise SimG4Core/CustomPhysics/Exotica_HSCP_SIM_cfi.customise "
