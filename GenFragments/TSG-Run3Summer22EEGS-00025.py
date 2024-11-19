@@ -35,6 +35,7 @@ _generator = cms.EDFilter(
             'processParameters',
         )
     )
+    
 )
 
 from GeneratorInterface.Core.ExternalGeneratorFilter import ExternalGeneratorFilter
@@ -44,11 +45,12 @@ bfilter = cms.EDFilter(
     "PythiaFilter",
     MaxEta = cms.untracked.double(9999.),
     MinEta = cms.untracked.double(-9999.),
-    ParticleID = cms.untracked.int32(531)
+    ParticleID = cms.untracked.int32(531),
+    psethack = cms.vstring('single electron pt 1 to 20')
 )
 
 decayfilter = cms.EDFilter("PythiaAllDauVFilter",
-    moduleLabel = cms.untracked.InputTag("generator","unsmeared"),
+    moduleLabel     = cms.untracked.InputTag("generator", "unsmeared"),
     verbose         = cms.untracked.int32(1),
     NumberDaughters = cms.untracked.int32(3),
     ParticleID      = cms.untracked.int32(531),

@@ -47,7 +47,7 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     
     premix_switches = "--step GEN,SIM,DIGI,L1"
     if withReco:
-        premix_switches += ",DIGI2RAW,RAW2DIGI,L1Reco,RECO,RECOSIM "
+        premix_switches += ",DIGI2RAW,HLT:2024v14,RAW2DIGI,L1Reco,RECO,RECOSIM "
     else:
         premix_switches += " "
     if withPileUp:
@@ -96,13 +96,13 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     
     command = "cmsDriver.py " 
     command += generator_fragment+" "
-    command += "--processName fullsim "
-    command += "--datatier GEN-SIM-DIGI-RAW-AODSIM " 
-    command += "--fileout file:private_BsToPhiGamma_Run3Summer22EEGS.root " 
+    command += "--datatier GEN-SIM-DIGI-RAW-AODSIM "
+    command += "--fileout file:private_BsToMuMuGamma_Run3.root " 
     command += "--mc --eventcontent AODSIM "
     command += premix_switches 
     command += eras_conditions[era] +" "
     command += "--nThreads 1 "
+    command += "--procModifiers egamma_lowPt_exclusive "
     command += "--python_filename PSet.py -n 5000 --no_exec "   
 
     #if generator_fragment.find("DoubleMu")==-1 and generator_fragment.find("DoubleDisplacedMu")==-1:
