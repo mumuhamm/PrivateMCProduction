@@ -13,7 +13,7 @@ pileup_inputs = {
 #########################################
 #########################################
 eras_conditions = {
-    "Run2022":"--era Run3  --conditions 140X_mcRun3_2022_realistic_v3 --geometry DB:Extended",
+    "Run2022":"--era Run3  --conditions 124X_mcRun3_2022_realistic_v12 --geometry DB:Extended",
     "Run2023":"--era Run3_2023  --conditions 131X_mcRun3_2023_realistic_v10 --geometry DB:Extended",
     "Run2029":"--era Phase2C17I13M9  --conditions 131X_mcRun4_realistic_v7 --geometry Extended2026D99",
     }
@@ -47,7 +47,7 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     
     premix_switches = "--step GEN,SIM,DIGI,L1"
     if withReco:
-        premix_switches += ",DIGI2RAW,HLT:2024v14,RAW2DIGI,L1Reco,RECO,RECOSIM "
+        premix_switches += ",DIGI2RAW,HLT:2022v12,RAW2DIGI,L1Reco,RECO,RECOSIM "
     else:
         premix_switches += " "
     if withPileUp:
@@ -96,13 +96,14 @@ def runCMSDriver(era, withPileUp, withReco, generator_fragment):
     
     command = "cmsDriver.py " 
     command += generator_fragment+" "
+    command += "-s HLT,RAW2DIGI,L1Reco,RECO "
     command += "--datatier GEN-SIM-DIGI-RAW-AODSIM "
     command += "--fileout file:private_BsToMuMuGamma_Run3.root " 
     command += "--mc --eventcontent AODSIM "
     command += premix_switches 
     command += eras_conditions[era] +" "
     command += "--nThreads 1 "
-    command += "--procModifiers egamma_lowPt_exclusive "
+    #command += "--procModifiers egamma_lowPt_exclusive "
     command += "--python_filename PSet.py -n 5000 --no_exec "   
 
     #if generator_fragment.find("DoubleMu")==-1 and generator_fragment.find("DoubleDisplacedMu")==-1:
